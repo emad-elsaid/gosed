@@ -14,6 +14,19 @@ type testCase struct {
 	err    error
 }
 
+func executeTestCases(t *testing.T, tcs []testCase, ed editor) {
+	for _, tc := range tcs {
+		o, err := ed(tc.input, tc.args)
+
+		if !bytes.Equal(o, tc.output) || !errors.Is(err, tc.err) {
+			t.Errorf(`Input: %#v
+    Expected: %s
+    Got: %s
+    Error: %s`, tc.args, tc.output, o, err)
+		}
+	}
+}
+
 func TestInput(t *testing.T) {
 	thisfile, _ := os.ReadFile("input_test.go")
 
@@ -29,13 +42,5 @@ func TestInput(t *testing.T) {
 		},
 	}
 
-	for _, tc := range tcs {
-		o, err := input(tc.input, tc.args)
-		if !bytes.Equal(o, tc.output) || !errors.Is(err, tc.err) {
-			t.Errorf(`Input: %#v
-    Expected: %s
-    Got: %s
-    Error: %s`, tc.args, tc.output, o, err)
-		}
-	}
+	executeTestCases(t, tcs, input)
 }
