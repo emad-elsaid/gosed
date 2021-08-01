@@ -38,7 +38,7 @@ This reads file `main.go`, rename the package to `mypackage` then writes it to `
 ## Installation
 
 ```sh
-go install github.com/emad-elsaid/gosed
+go install github.com/emad-elsaid/gosed@latest
 ```
 
 ## Steps
