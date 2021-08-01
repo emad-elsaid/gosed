@@ -5,11 +5,11 @@ A Go CLI program that reads go source code, manipulate the code and then writes 
 
 ## Motivation
 
-Go generics has been going for a while. but the simplicity of the language allows for writing generators to achieve the same job.
+Go generics discussions has been going on for a while in the Go community. but the simplicity of the language allows for writing generators to achieve the same result.
 
-The idea is writing Go valid code with tests and bench marks and everything. then use `go:generate` to run a tool like `gosed` that reads this code, parse it, perform some operations on it like replacing types, functions names, package name...etc then write it out to another go file.
+The idea is writing valid Go code with tests and benchmarks and everything. then use `go:generate` to run a tool like `gosed` that reads this code, parse it, perform some operations on it like replacing types, functions names, package name...etc then write it out to another go file.
 
-So `gosed` is one tool that can do that. it's a command line program that can read one of multiple files, do one or more processing steps and then write it to one or more destinations.
+So `gosed` is one tool that can do that. it's a command line program that can read one or multiple files, perform one or more processing steps and then write it to one or more destinations.
 
 ## How it works
 
