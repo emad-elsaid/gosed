@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"log"
 	"os"
 	"strings"
@@ -78,17 +77,4 @@ func main() {
 			log.Fatalf("Error executing\nStep: %s\nOptions:\n%s\n\tError:%s", s.name, bld.String(), err)
 		}
 	}
-}
-
-func input(i []byte, opts map[string]string) ([]byte, error) {
-	b, err := os.ReadFile(opts["path"])
-	if err != nil {
-		return nil, err
-	}
-
-	return bytes.Join([][]byte{i, b}, []byte{}), nil
-}
-
-func write(i []byte, opts map[string]string) ([]byte, error) {
-	return i, os.WriteFile(opts["path"], i, 0755)
 }
