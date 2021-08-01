@@ -7,14 +7,17 @@ import (
 	"testing"
 )
 
+type testCase struct {
+	input  []byte
+	args   map[string]string
+	output []byte
+	err    error
+}
+
 func TestInput(t *testing.T) {
 	thisfile, _ := os.ReadFile("input_test.go")
 
-	tcs := []struct {
-		args   map[string]string
-		output []byte
-		err    error
-	}{
+	tcs := []testCase{
 		{
 			args:   map[string]string{"path": "input_test.go"},
 			output: thisfile,
@@ -27,9 +30,12 @@ func TestInput(t *testing.T) {
 	}
 
 	for _, tc := range tcs {
-		o, err := input([]byte{}, tc.args)
+		o, err := input(tc.input, tc.args)
 		if !bytes.Equal(o, tc.output) || !errors.Is(err, tc.err) {
-			t.Errorf("Input: %#v\n\tExpected: %s\n\tGot: %s\n\tError: %s", tc.args, tc.output, o, err)
+			t.Errorf(`Input: %#v
+    Expected: %s
+    Got: %s
+    Error: %s`, tc.args, tc.output, o, err)
 		}
 	}
 }
